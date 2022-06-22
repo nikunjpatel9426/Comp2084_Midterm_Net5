@@ -28,8 +28,7 @@ namespace COMP2084_MidTerm_NET5
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("MidTermDB")));
+                options.UseSqlServer("Data Source=tcp:comp2084-srv-midterm.database.windows.net,1433;Initial Catalog=COMP2084_DB_MidTerm;User Id=@comp2084-srv-midterm;Password=Password1"));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
