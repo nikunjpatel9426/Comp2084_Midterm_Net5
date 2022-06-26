@@ -22,7 +22,7 @@ namespace COMP2084_MidTerm_NET5.Controllers
         // GET: Jobs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Job.ToListAsync());
+            return View(await _context.Job.OrderBy(Job => Job.Sector).ToListAsync());
         }
 
         // GET: Jobs/Details/5
@@ -52,6 +52,7 @@ namespace COMP2084_MidTerm_NET5.Controllers
 
             return View(jobViewModel);
         }
+
 
         // GET: Jobs/Create
         public IActionResult Create()

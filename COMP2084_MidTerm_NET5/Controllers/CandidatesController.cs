@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using COMP2084_MidTerm_NET5.Data;
 using COMP2084_MidTerm_NET5.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace COMP2084_MidTerm_NET5.Controllers
 {
@@ -22,7 +23,7 @@ namespace COMP2084_MidTerm_NET5.Controllers
         // GET: Candidates
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Candidate.Include(c => c.Job);
+            var applicationDbContext =_context.Candidate.Include(c=>c.Job).OrderBy(Job=>Job.LastName);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -45,6 +46,7 @@ namespace COMP2084_MidTerm_NET5.Controllers
             return View(candidate);
         }
 
+        [Authorize]
         // GET: Candidates/Create
         public IActionResult Create()
         {
@@ -69,6 +71,7 @@ namespace COMP2084_MidTerm_NET5.Controllers
             return View(candidate);
         }
 
+        [Authorize]
         // GET: Candidates/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
